@@ -1,7 +1,7 @@
 {
  "name": "Trading Lab",
  "short_name": "Trading Lab",
- "description": "Simulateur de bourse pédagogique, argent fictif.",
+ "description": "Simulateur de bourse pédagogique et Studio IA de trading. Argent fictif.",
  "start_url": "./jeu.html",
  "scope": "./",
  "display": "standalone",
@@ -25,6 +25,28 @@
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Jouer",
+   "url": "./jeu.html",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Studio IA",
+   "url": "./ia.html",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
   }
  ]
 }
