@@ -1,8 +1,31 @@
-const V='tl-v116';
-const FILES=['./','./index.html','./jeu.html','./ia.html','./ia-data-1.bin','./ia-data-eth-1.bin','./ia-data-sol-1.bin','./ia-data-eth-1.json','./ia-data-sol-1.json','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES).catch(()=>{})).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;
- // données Bitcoin : fichier qui ne change jamais (nom versionné) → servi depuis le cache, instantané
- if(/ia-data-\d+\.bin$/.test(new URL(e.request.url).pathname)){e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(x=>{if(x&&x.ok){const c=x.clone();caches.open(V).then(k=>k.put(e.request,c))}return x})));return}
- e.respondWith(fetch(e.request).then(r=>{if(r&&r.ok&&new URL(e.request.url).origin===location.origin){const c=r.clone();caches.open(V).then(x=>x.put(e.request,c))}return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./jeu.html'))))});
+
+/* Bullabo Studio IA — cache optimisé, compatible GitHub Pages */
+const V='bullabo-ia-opt-v3';
+const SHELL=['./ia.html','./icon-192.png'];
+self.addEventListener('install',event=>{
+ event.waitUntil(caches.open(V).then(cache=>Promise.allSettled(SHELL.map(f=>cache.add(f)))).then(()=>self.skipWaiting()));
+});
+self.addEventListener('activate',event=>{
+ event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>
+  (k.startsWith('bullabo-ia-opt-')&&k!==V)
+ ).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+});
+self.addEventListener('fetch',event=>{
+ const req=event.request;
+ if(req.method!=='GET')return;
+ const url=new URL(req.url);
+ if(url.origin!==self.location.origin)return;
+ // Versioned historical data are immutable. No download until first use.
+ if(/\/ia-data-(?:\d+|eth-\d+|sol-\d+)\.(?:bin|json)$/.test(url.pathname)){
+  event.respondWith(caches.match(req).then(saved=>saved||fetch(req).then(resp=>{
+   if(resp.ok){const copy=resp.clone();event.waitUntil(caches.open(V).then(c=>c.put(req,copy)))}
+   return resp
+  })));
+  return;
+ }
+ // HTML can change; fetch fresh first, fall back to the exact URL offline.
+ event.respondWith(fetch(req).then(resp=>{
+  if(resp.ok){const copy=resp.clone();event.waitUntil(caches.open(V).then(c=>c.put(req,copy)))}
+  return resp
+ }).catch(async()=>await caches.match(req)||Response.error()));
+});
