@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ia-data-1.bin
+
+Sitemap: https://7cz4hbbw59-pixel.github.io/trading-lab/sitemap.xml
