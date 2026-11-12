@@ -1,0 +1,112 @@
+{
+ "id": "./ia.html",
+ "name": "Entitia Lab · IA de trading",
+ "short_name": "Entitia Lab",
+ "description": "Entraîne-toi au trading sur les vrais cours en direct avec de l'argent fictif, apprends avec des cours gratuits et rencontre Entitia, une IA qui trade, apprend et te parle.",
+ "start_url": "./ia.html?source=pwa",
+ "scope": "./",
+ "display": "standalone",
+ "display_override": [
+  "standalone",
+  "minimal-ui"
+ ],
+ "orientation": "any",
+ "background_color": "#050506",
+ "theme_color": "#050506",
+ "lang": "fr",
+ "dir": "ltr",
+ "categories": [
+  "education",
+  "finance",
+  "games"
+ ],
+ "icons": [
+  {
+   "src": "favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-96.png",
+   "sizes": "96x96",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  },
+  {
+   "src": "icon-monochrome-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "monochrome"
+  }
+ ],
+ "screenshots": [
+  {
+   "src": "screenshot-mobile.jpg",
+   "sizes": "1170x1992",
+   "type": "image/jpeg",
+   "form_factor": "narrow",
+   "label": "Entitia, son visage et son cerveau en direct"
+  },
+  {
+   "src": "screenshot-wide.jpg",
+   "sizes": "1366x900",
+   "type": "image/jpeg",
+   "form_factor": "wide",
+   "label": "Entitia trade les vrais cours et discute avec toi"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Parler à Entitia",
+   "short_name": "Entitia",
+   "url": "./ia.html?tab=ent",
+   "icons": [
+    {
+     "src": "icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Trader",
+   "short_name": "Trader",
+   "url": "./ia.html?tab=trade",
+   "icons": [
+    {
+     "src": "icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Apprendre le trading",
+   "short_name": "Apprendre",
+   "url": "./ia.html?tab=learn",
+   "icons": [
+    {
+     "src": "icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  }
+ ]
+}
