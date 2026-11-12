@@ -1,5 +1,5 @@
 /* Entitia Lab — cache : pages fraîches d'abord (toujours revérifiées auprès du serveur), repli hors ligne */
-const V='entitia-v296-bouche';
+const V='entitia-v299-defilement';
 const SHELL=['./','./index.html','./ia.html','./jeu.html','./manifest.json','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./favicon.svg','./favicon.ico','./favicon-32.png','./icon-96.png','./icon-monochrome-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>Promise.allSettled(SHELL.map(f=>c.add(f)))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V && x!=='bullabo-user-save-v1').map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
